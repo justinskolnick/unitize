@@ -1,7 +1,7 @@
 unitize
 =======
 
-The SCSS functions in [unitize.scss](https://github.com/justinskolnick/unitize/blob/master/unitize.scss) attempt to resolve a persistent front-end annoyance by wresting some sense from relative CSS units. These functions are intended to abstract common CSS units of measure (i.e., `px`, `em`, `rem`) from the numerical values by which they represent actual measurements. In other words, I want all the benefits of relative units without the hassle of having to calculate, copy, and paste values with *n* decimal places. Whole numbers are nice.
+The SCSS functions in [unitize.scss](https://github.com/justinskolnick/unitize/blob/master/unitize.scss) attempt to resolve a persistent front-end annoyance by wrestling some sense into relative CSS units. These functions are intended to abstract common CSS units of measure (i.e., `px`, `em`, `rem`) from the numerical values by which they represent actual measurements. In other words, I want all the benefits of relative units without the hassle of having to calculate, copy, and paste values with *n* decimal places. Whole numbers are nice.
 
 In practice, the functions allow writing:
 
