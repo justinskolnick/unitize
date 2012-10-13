@@ -1,0 +1,41 @@
+$root-font-size: 13;
+
+@function rem($value) {
+  @return ($value / $root-font-size) + rem;
+}
+
+@function unitize($list, $unit: px) {
+  $values: null !default;
+  
+  @each $value in $list {
+    
+    @if type-of($value) == number {
+    
+      @if unitless($value) {
+        
+        @if $unit == rem {
+          $value: rem($value);
+        } @else {
+          $value: $value + $unit;
+        }
+        
+      }
+  
+    }
+    
+    $values: append($values, $value);
+  }
+
+  @return $values;
+}
+
+html {
+  font-size: unitize($root-font-size);
+}
+
+body {
+  margin: unitize(4 6% 2 9px);
+  padding: unitize(4 6 2 9, rem);
+  line-height: unitize(18, rem);
+  box-shadow: unitize(inset 5 2 #cfc);
+}
