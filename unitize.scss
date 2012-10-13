@@ -2,7 +2,7 @@ $root-font-size: 12;
 
 
 //  rem()
-//  Divides $value by $root-font-size and appends 'rem' unit
+//  Divides $value by $root-font-size and appends "rem" unit
 //
 //  PARAMS:
 //    $value        required
@@ -16,7 +16,7 @@ $root-font-size: 12;
 
 
 //  em()
-//  Divides $value by the given base $font-size param and appends 'em' unit
+//  Divides $value by the given base $font-size param and appends "em" unit
 //
 //  PARAMS:
 //    $value        required
@@ -32,7 +32,7 @@ $root-font-size: 12;
 
 
 //  unitize()
-//  Converts the unitless values in a specified SASS list to values in a given unit
+//  Converts the unitless numerical values in a given SASS list to values in a given unit
 //  See the SASS_REFERENCE for a description and examples of the "list" data type: 
 //    http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#lists
 //  Accepts optional $font-size param (defaulting to $root-font-size) for "em" conversions
@@ -54,7 +54,7 @@ $root-font-size: 12;
   
   @each $value in $list {                 // iterate through $list 
     
-    @if type-of($value) == number {       // skip words
+    @if type-of($value) == number {       // skip strings
     
       @if unitless($value) {              // respect values already assigned units
         
@@ -75,6 +75,7 @@ $root-font-size: 12;
 
   @return $values;
 }
+
 
 html {
 //  font-size can be calculated as a percentage or set in pixels
