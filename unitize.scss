@@ -1,21 +1,68 @@
-$root-font-size: 13;
+$root-font-size: 12;
+
+
+//  rem()
+//  Divides $value by $root-font-size and appends 'rem' unit
+//
+//  PARAMS:
+//    $value        required
+//
+//  EXAMPLES:
+//    rem(18)       #=> 1.5rem
 
 @function rem($value) {
   @return ($value / $root-font-size) + rem;
 }
 
-@function unitize($list, $unit: px) {
-  $values: null !default;
+
+//  em()
+//  Divides $value by the given base $font-size param and appends 'em' unit
+//
+//  PARAMS:
+//    $value        required
+//    $font-size    not required; defaults to value of $root-font-size
+//
+//  EXAMPLES:
+//    em(18, 12)    #=> 1.5em
+//    em(20)        #=> 1.66667em
+
+@function em($value, $font-size: $root-font-size) {
+  @return ($value / $font-size) + em;
+}
+
+
+//  unitize()
+//  Converts the unitless values in a specified SASS list to values in a given unit
+//  See the SASS_REFERENCE for a definition about the "list" data type: 
+//    http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#lists
+//  Accepts optional $font-size param (defaulting to $root-font-size) for "em" conversions
+//
+//  PARAMS:
+//    $list         required
+//    $unit         not required; defaults to pixels ("px")
+//    $font-size    not required; defaults to value of $root-font-size
+//
+//  NOTES:
+//    CSS font shorthand (e.g., "bold 12/18 Helvetica, Arial, sans-serif") is not yet supported;
+//      see "Division and /": http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#division-and-slash
+//
+//  EXAMPLES:
+//    See CSS rulesets below the function
+
+@function unitize($list, $unit: px, $font-size: $root-font-size) {
+  $values: null !default;                 // declare $values; to return new concatenated list
   
-  @each $value in $list {
+  @each $value in $list {                 // iterate through $list 
     
-    @if type-of($value) == number {
+    @if type-of($value) == number {       // skip words
     
-      @if unitless($value) {
+      @if unitless($value) {              // respect values already assigned units
         
-        @if $unit == rem {
+        @if $unit == rem {                // rem conversions
           $value: rem($value);
-        } @else {
+        } @else if $unit == em {          // em conversions
+          $value: em($value, $font-size);
+        } @else {                         // everything else avoids conversion
           $value: $value + $unit;
         }
         
@@ -23,14 +70,16 @@ $root-font-size: 13;
   
     }
     
-    $values: append($values, $value);
+    $values: append($values, $value);     // concatenate values
   }
 
   @return $values;
 }
 
 html {
-  font-size: unitize($root-font-size);
+//  font-size can be calculated as a percentage or set in pixels
+//  font-size: percentage($root-font-size/16);
+  font-size: $root-font-size + px;
 }
 
 body {
@@ -38,4 +87,11 @@ body {
   padding: unitize(4 6 2 9, rem);
   line-height: unitize(18, rem);
   box-shadow: unitize(inset 5 2 #cfc);
+  text-shadow: unitize(3 3 6 rgba(0, 0, 0, 0.5), rem);
+}
+
+p {
+  margin: unitize(3 6, em, 12);
+  font-size: em(12);
+  line-height: unitize(18, em);
 }
