@@ -75,24 +75,3 @@ $root-font-size: 12;
 
   @return $values;
 }
-
-
-html {
-//  font-size can be calculated as a percentage or set in pixels
-//  font-size: percentage($root-font-size/16);
-  font-size: $root-font-size + px;
-}
-
-body {
-  margin: unitize(4 6% 2 9px);
-  padding: unitize(4 6 2 9, rem);
-  line-height: unitize(18, rem);
-  box-shadow: unitize(inset 5 2 #cfc);
-  text-shadow: unitize(3 3 6 rgba(0, 0, 0, 0.5), rem);
-}
-
-p {
-  margin: unitize(3 6, em, 12);
-  font-size: em(12);
-  line-height: unitize(18, em);
-}
