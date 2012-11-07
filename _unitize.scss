@@ -1,4 +1,4 @@
-$root-font-size: 12;
+$root-font-size: 12 !default;
 
 
 //  rem()
@@ -50,7 +50,7 @@ $root-font-size: 12;
 //    See CSS rulesets below the function
 
 @function unitize($list, $unit: px, $font-size: $root-font-size) {
-  $values: null !default;                 // declare $values; to return new concatenated list
+  $values: null;                          // declare $values; to return new concatenated list
   
   @each $value in $list {                 // iterate through $list 
     
