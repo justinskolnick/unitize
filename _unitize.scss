@@ -2,32 +2,50 @@ $root-font-size: 12 !default;
 
 
 //  rem()
-//  Divides $value by $root-font-size and appends "rem" unit
+//  Divides $input by $root-font-size and appends "rem" unit
+//  $input is processed via unitize() if it contains multiple values
 //
 //  PARAMS:
-//    $value        required
+//    $input        required
 //
 //  EXAMPLES:
 //    rem(18)       #=> 1.5rem
 
-@function rem($value) {
-  @return ($value / $root-font-size) + rem;
+@function rem($input) {
+  $output: null;
+
+  @if type-of($input) == list {
+    $output: unitize($input, rem);
+  } @else {
+    $output: ($input / $root-font-size) + rem;
+  }
+  
+  @return $output;
 }
 
 
 //  em()
-//  Divides $value by the given base $font-size param and appends "em" unit
+//  Divides $input by the given base $font-size param and appends "em" unit
+//  $input is processed via unitize() if it contains multiple values
 //
 //  PARAMS:
-//    $value        required
+//    $input        required
 //    $font-size    not required; defaults to value of $root-font-size
 //
 //  EXAMPLES:
 //    em(18, 12)    #=> 1.5em
 //    em(20)        #=> 1.66667em
 
-@function em($value, $font-size: $root-font-size) {
-  @return ($value / $font-size) + em;
+@function em($input, $font-size: $root-font-size) {
+  $output: null;
+
+  @if type-of($input) == list {
+    $output: unitize($input, em, $font-size);
+  } @else {
+    $output: ($input / $font-size) + em;
+  }
+  
+  @return $output;
 }
 
 
@@ -50,7 +68,7 @@ $root-font-size: 12 !default;
 //    See CSS rulesets below the function
 
 @function unitize($list, $unit: px, $font-size: $root-font-size) {
-  $values: null;                          // declare $values; to return new concatenated list
+  $output: null;                          // declare $output; to return new concatenated list
   
   @each $value in $list {                 // iterate through $list 
     
@@ -70,8 +88,8 @@ $root-font-size: 12 !default;
   
     }
     
-    $values: append($values, $value);     // concatenate values
+    $output: append($output, $value);     // concatenate values
   }
 
-  @return $values;
+  @return $output;
 }

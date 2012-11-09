@@ -10,5 +10,6 @@ body {
 
 p {
   margin: 0.25em 0.5em;
+  padding: 0.66667rem 1rem;
   font-size: 1em;
   line-height: 1.5em; }

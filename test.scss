@@ -8,14 +8,15 @@ html {
 
 body {
   margin: unitize(4 6% 2 9px);
-  padding: unitize(4 6 2 9, rem);
-  line-height: unitize(18, rem);
+  padding: rem(4 6 2 9);
+  line-height: rem(18);
   box-shadow: unitize(inset 5 2 #cfc);
-  text-shadow: unitize(3 3 6 rgba(0, 0, 0, 0.5), rem);
+  text-shadow: rem(3 3 6 rgba(0, 0, 0, 0.5));
 }
 
 p {
-  margin: unitize(3 6, em, 12);
+  margin: em(3 6, 12);
+  padding: rem(8 12);
   font-size: em(12);
-  line-height: unitize(18, em);
+  line-height: em(18);
 }
