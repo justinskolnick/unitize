@@ -21,7 +21,7 @@ in any case otherwise requiring a manual calculation (and later recalculation) a
 font-size: 0.25925925925926em; /* 7px / 27px = 0.25925925925926em */
 ```
 
-For additional examples and recommended or potential usage, see [test.scss](/justinskolnick/unitize/blob/master/test.scss), along with its compiled CSS companion file, [test.css](/justinskolnick/unitize/blob/master/test.css).
+For additional examples and recommended or potential usage, see [test.scss](https://github.com/justinskolnick/unitize/blob/master/test.scss), along with its compiled CSS companion file, [test.css](https://github.com/justinskolnick/unitize/blob/master/test.css).
 
 ## TODO
 
