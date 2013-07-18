@@ -9,17 +9,19 @@ The Sass functions in [_unitize.scss](https://github.com/justinskolnick/unitize/
 
 ### Configuration
 
-First, install _unitize.scss and `@import 'unitize'`. In a separate config file or at the top of your SCSS, declare a root font size (in pixels, without the unit). The default is `12`.
+First, install _unitize.scss and `@import 'unitize'`. 
+
+The default `$root-font-size` is `12`; to override this value, assign a new (and unitless) `$root-font-size` in a separate config file or at the top of your SCSS.
 
 ```SCSS
 $root-font-size: 10;
 ```
 
-If using rems in your CSS, set the document's root font size on the HTML element as pixels or a percentage. Given a `$root-font-size` of `10`, the rulesets below yield `12px` and `62.5%`, respectively.
+If using rems, set the document's root font size on the HTML element as pixels or a percentage. Given a `$root-font-size` of `10`, the rulesets below yield font-sizes of `12px` and `62.5%`, respectively.
 
 ```SCSS
 html {
-//  font-size: $root-font-size + px;
+  font-size: $root-font-size + px;
   font-size: percentage($root-font-size/16);
 }
 ```
@@ -52,7 +54,7 @@ text-shadow: rem(3 3 6 rgba(0, 0, 0, 0.5));
 // => text-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
 ```
 
-`em()` yields values relative to the `$root-font-size` or an optional second argument.
+`em()` yields values relative to the `$root-font-size` or a `font-size` supplied in the optional second argument.
 
 ```SCSS
 // $root-font-size: 12;
