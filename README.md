@@ -5,11 +5,67 @@ The Sass functions in [_unitize.scss](https://github.com/justinskolnick/unitize/
 
 `Unitize` processes numerical values as well as those declarations that Sass identifies as [lists](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#lists). Lists include shorthand CSS declarations like `2px 4px 5px 3px` and `inset 2px 2px 4px black`. Strings, colors, and values already assigned a unit (e.g., `inset`, `#000`, `20%`) pass undisturbed through the function.
 
-## Usage
+## How it works
+
+### Configuration
+
+First, install _unitize.scss and `@import 'unitize'`. In a separate config file or at the top of your SCSS, declare a root font size (in pixels, without the unit). The default is `12`.
+
+```SCSS
+$root-font-size: 10;
+```
+
+If using rems in your CSS, set the document's root font size on the HTML element as pixels or a percentage. Given a `$root-font-size` of `10`, the rulesets below yield `12px` and `62.5%`, respectively.
+
+```SCSS
+html {
+//  font-size: $root-font-size + px;
+  font-size: percentage($root-font-size/16);
+}
+```
+
+### Usage
+
+Send values through one of `em()`, `rem()`, or `unitize()`. The following examples assume the default `$root-font-size` of 12.
+
+`unitize()` returns `px` values:
+
+```SCSS
+// $root-font-size: 12;
+
+margin: unitize(4 6% 2 9px);
+// => margin: 4px 6% 2px 9px;
+
+box-shadow: unitize(inset 5 2 #cfc);
+// => box-shadow: inset 5px 2px #ccffcc;
+```
+
+`rem()` returns values in rems, relative to the `$root-font-size`:
+
+```SCSS
+// $root-font-size: 12;
+
+padding: rem(4 6 2 9);
+// => padding: 0.33333rem 0.5rem 0.16667rem 0.75rem;
+
+text-shadow: rem(3 3 6 rgba(0, 0, 0, 0.5));
+// => text-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+```
+
+`em()` yields values relative to the `$root-font-size` or an optional second argument.
+
+```SCSS
+// $root-font-size: 12;
+
+font-size: em(12);
+// => font-size: 1em;
+
+line-height: em(18, 12);
+// => line-height: 1.5em;
+```
+
 
 For examples and recommended uses, see [test.scss](https://github.com/justinskolnick/unitize/blob/master/test.scss), along with the compiled CSS in [test.css](https://github.com/justinskolnick/unitize/blob/master/test.css).
-
-`font-size: em(7, 27);` yields `font-size: 0.25925925925926em;`
 
 ## TODO
 
